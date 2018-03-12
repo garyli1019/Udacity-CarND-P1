@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[image1]: ./test_images_output/draw_line_0.png "Grayscale"
 
 ---
 
@@ -23,25 +23,29 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
-
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
+My pipeline consisted of 5 steps. 
+1. Blur the gray scale image
+2. Apply canny edge
+3. Apply mask region
+4. Convert to binary image
+5. Hough transform
+6. Combine the image
 ![alt text][image1]
+
+My draw_lines() function:
+First I used the slope of the lines to separate left line and right line.
+Then I selected the longest line in each side.
+After that, I calculated the b value of the normal line function(y = kx + b) and used the function to locate the point that the line will intersect with the bottom of the image. By doing this, my lines will always start from the bottom of the image, even if the line in the image are dotted.
+Finally, draw the lines on the image.
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+If the line was curved, it might not work well.
+If the line was not clear, or the weather was bad, the line might not be located.
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+Find a better way to improve draw_lines() function
+Find out how to dealing with curved line.
